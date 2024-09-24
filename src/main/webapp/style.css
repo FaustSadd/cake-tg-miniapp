@@ -29,3 +29,18 @@ button:hover {
     font-size: 18px;
     color: #555;
 }
+.dish__image{
+    height:245px;
+    display:inline-box;
+    box-sizing:border-box;
+    text-align:center;
+    justify-content:center;
+    display:flex;
+
+}
+.dish__name{
+    text-align = center;
+    justify-content: center;
+    font-size: medium;
+    font-weight: bold;
+}
