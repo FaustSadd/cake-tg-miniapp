@@ -48,6 +48,17 @@
       <scope>provided</scope>
     </dependency>
 
+    <dependency>
+      <groupId>org.apache.tomcat.embed</groupId>
+      <artifactId>tomcat-embed-jasper</artifactId>
+    </dependency>
+
+    <dependency>
+      <groupId>com.guicedee.services</groupId>
+      <artifactId>javax.servlet-api</artifactId>
+      <version>62</version>
+    </dependency>
+
   </dependencies>
   <build>
     <finalName>cake-tg-miniapp</finalName>

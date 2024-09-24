@@ -7,8 +7,12 @@ import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
 import org.telegram.telegrambots.meta.api.objects.inlinequery.InlineQuery;
 import org.telegram.telegrambots.meta.api.objects.inlinequery.inputmessagecontent.InputTextMessageContent;
 import org.telegram.telegrambots.meta.api.objects.inlinequery.result.InlineQueryResultArticle;
+import org.telegram.telegrambots.meta.api.objects.webapp.WebAppInfo;
 import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 import org.springframework.beans.factory.annotation.Autowired;
+
+import org.telegram.telegrambots.meta.api.objects.replykeyboard.InlineKeyboardMarkup;
+import org.telegram.telegrambots.meta.api.objects.replykeyboard.buttons.InlineKeyboardButton;
 
 import java.util.Collections;
 
@@ -32,45 +36,47 @@ public class TelegramBot extends TelegramLongPollingBot {
     }
     @Override
     public void onUpdateReceived(Update update) {
-        if (update.hasInlineQuery()) {
-            handleInlineQuery(update);
-        } else if (update.hasMessage() && update.getMessage().hasText()) {
-            handleTextMessage(update);
+        if (update.hasMessage() && update.getMessage().hasText()) {
+            String messageText = update.getMessage().getText();
+            long chatId = update.getMessage().getChatId();
+
+            if (messageText.equals("/miniapp")) {
+                SendMessage message = new SendMessage();
+                message.setChatId(chatId);
+                message.setText("Нажмите кнопку ниже, чтобы открыть мини-приложение:");
+
+                // Создайте кнопку для запуска Web App
+                InlineKeyboardMarkup markupInline = new InlineKeyboardMarkup();
+                InlineKeyboardButton button = new InlineKeyboardButton();
+                button.setText("Открыть мини-приложение");
+                button.setWebApp(new WebAppInfo("https://cakeminiapp.h1n.ru/")); // Замените на URL вашего Web App
+                markupInline.setKeyboard(Collections.singletonList(Collections.singletonList(button)));
+                message.setReplyMarkup(markupInline);
+
+                try {
+                    execute(message);
+                } catch (TelegramApiException e) {
+                    e.printStackTrace();
+                }
+            } else {
+                // Обычный ответ на текстовое сообщение
+                SendMessage message = new SendMessage();
+                message.setChatId(chatId);
+                message.setText("Вы написали: " + messageText);
+
+                try {
+                    execute(message);
+                } catch (TelegramApiException e) {
+                    e.printStackTrace();
+                }
+            }
         }
     }
-    private void handleTextMessage(Update update) {
-        String messageText = update.getMessage().getText();
-        long chatId = update.getMessage().getChatId();
-
-        SendMessage message = new SendMessage();
-        message.setChatId(chatId);
-        message.setText("Вы написали: " + messageText);
-
-        try {
-            execute(message);
-        } catch (TelegramApiException e) {
-            e.printStackTrace();
-        }
-    }
-
-    private void handleInlineQuery(Update update) {
-        InlineQuery inlineQuery = update.getInlineQuery();
-        InlineQueryResultArticle result = new InlineQueryResultArticle();
-        result.setId(inlineQuery.getId());
-        result.setTitle("Open Mini App");
-        result.setInputMessageContent(new InputTextMessageContent("Click here to open the mini app"));
-        result.setUrl("http://localhost:8080"); // URL вашего локального мини-приложения
-
-        AnswerInlineQuery answerInlineQuery = new AnswerInlineQuery();
-        answerInlineQuery.setInlineQueryId(inlineQuery.getId());
-        answerInlineQuery.setResults(Collections.singletonList(result));
-
-        try {
-            execute(answerInlineQuery);
-        } catch (TelegramApiException e) {
-            e.printStackTrace();
-        }
-    }
-    //Доделать открытие miniapp
 }
+
+
+
+
+
+
 
