@@ -1,46 +1,260 @@
+/* Основные стили */
 body {
     font-family: Arial, sans-serif;
     background-color: #f0f0f0;
     text-align: center;
     margin: 0;
     padding: 0;
+    overflow-x: hidden; /* Отключение горизонтального прокручивания */
+    display: flex;
+    justify-content: flex-start; /* Контент теперь начинается с верхней части */
+    flex-direction: column;
+    background-image: linear-gradient(to top, #fff, #f0f0f0);
 }
 
+/* Обеспечиваем вертикальную прокрутку */
+html, body {
+    height: 100%;
+    overflow-y: auto; /* Обеспечивает вертикальную прокрутку */
+    -webkit-overflow-scrolling: touch; /* Для плавной прокрутки на iOS */
+}
+
+/* Заголовок */
 h1 {
     color: #333;
+    margin-top: 20px;
+    font-size: 24px;
+    animation: fadeIn 1s ease-out;
 }
 
-button {
-    padding: 10px 20px;
+/* Кнопки */
+button, .add-to-cart {
+    padding: 12px 20px;
     font-size: 16px;
     color: white;
-    background-color: #007bff;
+    background-color: #f8c8d8; /* Пастельно-розовый цвет */
     border: none;
     border-radius: 5px;
     cursor: pointer;
+    display: grid;
+    width: 100%;
+    max-width: 250px;
+    margin: 10px auto;
+    transition: background-color 0.3s ease, transform 0.2s ease;
 }
 
-button:hover {
-    background-color: #0056b3;
+/* Кнопка с анимацией при наведении */
+button:hover, .add-to-cart:hover {
+    background-color: #f8a0b1; /* Более яркий розовый при наведении */
+    transform: scale(1.05);
 }
 
-#message {
-    margin-top: 20px;
+/* Кнопка очистки корзины */
+#clearCartButton {
+    background-color: #ff6347; /* Оранжево-красный для очистки корзины */
+}
+
+#clearCartButton:hover {
+    background-color: #f44336; /* Ярко-красный цвет при наведении */
+}
+
+/* Кнопка перехода в корзину */
+#goToCartButton {
+    background-color: #ff69b4; /* Ярко-розовый для кнопки перехода в корзину */
+}
+
+/* Кнопки выбора веса */
+.weight-btn {
+    padding: 8px 16px;
+    font-size: 14px;
+    background-color: #f8c8d8;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.weight-btn:hover {
+    background-color: #f8a0b1;
+    transform: scale(1.05);
+}
+
+/* Подсветка выбранной кнопки */
+.weight-btn.selected {
+    background-color: #ff69b4; /* Ярко-розовый цвет для выделенной кнопки */
+    color: white;
+}
+
+/* Продукты */
+.products-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    padding: 10px;
+    gap: 15px;
+    animation: fadeInUp 1s ease-out;
+}
+
+/* Продукт */
+.product {
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    width: 48%;
+    padding: 15px;
+    margin-bottom: 20px;
+    text-align: center;
+    box-sizing: border-box;
+    transition: transform 0.3s ease;
+}
+
+.product:hover {
+    transform: translateY(-5px);
+}
+
+/* Изображение блюда */
+.dish__image img {
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+    transition: transform 0.3s ease;
+}
+
+.dish__image img:hover {
+    transform: scale(1.05);
+}
+
+/* Название блюда */
+.dish__name {
     font-size: 18px;
-    color: #555;
-}
-.dish__image{
-    height:245px;
-    display:inline-box;
-    box-sizing:border-box;
-    text-align:center;
-    justify-content:center;
-    display:flex;
-
-}
-.dish__name{
-    text-align = center;
-    justify-content: center;
-    font-size: medium;
     font-weight: bold;
+    margin-top: 15px;
+    color: #333;
+    transition: color 0.3s ease;
+}
+
+.dish__name:hover {
+    color: #ff69b4;
+}
+
+/* Описание товара */
+.product-description {
+    font-size: 14px;
+    color: #777;
+    margin-top: 10px;
+    line-height: 1.5;
+}
+
+/* Цена */
+.product-price {
+    font-size: 16px;
+    color: #000000;
+    font-weight: bold;
+    margin-top: 10px;
+}
+
+/* Кнопки выбора веса */
+.weight-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 10px;
+}
+
+/* Анимации */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Мобильные стили */
+@media (max-width: 767px) {
+    body {
+        padding: 20px;
+        font-size: 14px;
+    }
+
+    h1 {
+        font-size: 22px;
+    }
+
+    button, .add-to-cart {
+        font-size: 14px;
+    }
+
+    .product {
+        width: 100%;
+        margin-bottom: 20px;
+    }
+
+    .products-container {
+        flex-direction: column;
+        gap: 20px;
+    }
+
+    .dish__image img {
+        width: 100%;
+    }
+
+    .cart-item .cart-item-remove {
+        max-width: 120px;
+        margin: 10px auto;
+        border-radius: 25px;
+    }
+}
+
+/* Оформление для кнопки удаления из корзины */
+.cart-item .cart-item-remove {
+    background-color: #ff6347;
+    width: 100%;
+    max-width: 150px;
+    margin: 20px auto;
+    border-radius: 25px;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.cart-item .cart-item-remove:hover {
+    background-color: #f44336;
+    transform: scale(1.05);
+}
+.toast-container {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%); /* Центрируем */
+    z-index: 1000;
+    display: flex;
+    flex-direction: column; /* Располагаем сообщения вертикально */
+    align-items: center; /* Центрируем сообщения по горизонтали */
+}
+
+.toast {
+    background-color: #333;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 5px;
+    margin: 5px 0;
+    opacity: 0;
+    transition: opacity 0.5s ease-in-out;
+    transform: translateX(100%);
+}
+
+.toast.show {
+    opacity: 1;
+    transform: translateX(0);
 }

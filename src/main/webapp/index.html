@@ -1,29 +1,78 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ru">
 <head>
     <script src="https://telegram.org/js/telegram-web-app.js"></script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mini App</title>
+    <title>Мини-приложение</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-<h1>Welcome to the Mini App</h1>
-<p>This is a simple mini app to demonstrate integration with Telegram.</p>
-<button id="clickMeButton">Click Me!</button>
-<p id="message"></p>
+<h1>Добро пожаловать в мини-приложение</h1>
+<p>Это простое мини-приложение для демонстрации интеграции с Telegram.</p>
+
+<div class="products-container">
+    <div class="product" data-id="1" data-name="Торт BALI" data-price="1500">
+        <div class="dish__image">
+            <img src="img_cake/min_bali-71.jpg.webp" alt="Торт BALI">
+        </div>
+        <p class="dish__name">Торт BALI</p>
+        <p class="product-description">Тропический торт с насыщенными вкусами кокоса и шоколада.</p>
+        <p class="product-price">₽ 1500</p>
+        <p>Выберите вес:</p>
+        <div class="weight-buttons">
+            <button class="weight-btn" data-weight="1">1 кг</button>
+            <button class="weight-btn" data-weight="2">2 кг</button>
+            <button class="weight-btn" data-weight="3">3 кг</button>
+            <button class="weight-btn" data-weight="4">4 кг</button>
+            <button class="weight-btn" data-weight="5">5 кг</button>
+        </div>
+        <button class="add-to-cart">Добавить в корзину</button>
+    </div>
+
+    <div class="product" data-id="2" data-name="Торт CLOUD FOREST" data-price="1200">
+        <div class="dish__image">
+            <img src="img_cake/min_cf-180.jpg.webp" alt="Торт CLOUD FOREST">
+        </div>
+        <p class="dish__name">Торт CLOUD FOREST</p>
+        <p class="product-description">Легкий и воздушный торт с идеальным сочетанием ванили и ягод.</p>
+        <p class="product-price">₽ 1200</p>
+        <p>Выберите вес:</p>
+        <div class="weight-buttons">
+            <button class="weight-btn" data-weight="1">1 кг</button>
+            <button class="weight-btn" data-weight="2">2 кг</button>
+            <button class="weight-btn" data-weight="3">3 кг</button>
+            <button class="weight-btn" data-weight="4">4 кг</button>
+            <button class="weight-btn" data-weight="5">5 кг</button>
+        </div>
+        <button class="add-to-cart">Добавить в корзину</button>
+    </div>
+    <div id="toast-container" class="toast-container"></div>
+
+    <div class="product" data-id="3" data-name="Торт MALIBU" data-price="1800">
+        <div class="dish__image">
+            <img src="img_cake/min_malibu-77.jpg.webp" alt="Торт MALIBU">
+        </div>
+        <p class="dish__name">Торт MALIBU</p>
+        <p class="product-description">Декоративный торт с тропическим акцентом Malibu, с ромом и кокосом.</p>
+        <p class="product-price">₽ 1800</p>
+        <p>Выберите вес:</p>
+        <div class="weight-buttons">
+            <button class="weight-btn" data-weight="1">1 кг</button>
+            <button class="weight-btn" data-weight="2">2 кг</button>
+            <button class="weight-btn" data-weight="3">3 кг</button>
+            <button class="weight-btn" data-weight="4">4 кг</button>
+            <button class="weight-btn" data-weight="5">5 кг</button>
+        </div>
+        <button class="add-to-cart">Добавить в корзину</button>
+    </div>
+</div>
+
+<!-- Кнопка перехода в корзину -->
+<div class="cart-button-container">
+    <button id="goToCartButton">Перейти в корзину</button>
+</div>
+
 <script src="script.js"></script>
-<div class="dish__image">
-    <img src="img_cake/min_bali-71.jpg.webp">
-</div>
-<p class="dish__name">Торт BALI</p>
-<div class="dish__image">
-    <img src="img_cake/min_cf-180.jpg.webp">
-</div>
-<p class="dish__name">Торт CLOUD FOREST</p>
-<div class="dish__image">
-    <img src="img_cake/min_malibu-77.jpg.webp">
-</div>
-<p class="dish__name">Торт MALIBU</p>
 </body>
 </html>
